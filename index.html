@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b24">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Dino Egg Bros V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="portrait"><img id="portrait-img" alt=""></div>
+      <div class="lives-col">
+        <div class="lives"><span class="x">x</span><span id="lives">3</span></div>
+        <div id="hearts" class="hearts"></div>
+      </div>
+    </div>
+    <div class="hud-center">
+      <div class="score-label">SCORE</div>
+      <div id="score" class="score">0000000</div>
+    </div>
+    <div class="hud-right">
+      <div class="counter"><img id="coin-img" alt=""><span class="x">x</span><span id="coins">0</span></div>
+      <div class="counter"><img id="egg-img" alt=""><span class="x">x</span><span id="eggs">0</span></div>
+      <button id="pause-btn" class="pause-btn" aria-label="Pause"><span></span><span></span></button>
+    </div>
+    <div id="powerups" class="powerups"></div>
+    <div id="boss-bar" class="boss-bar hidden">
+      <div class="boss-name">MOTHERSHIP ZORGAX</div>
+      <div class="boss-track"><div id="boss-fill" class="boss-fill"></div><div id="boss-lag" class="boss-lag"></div></div>
+    </div>
+  </div>
+
+  <div id="touch" aria-hidden="true">
+    <div class="stick-zone"><div class="stick-base"></div><div class="stick-knob"></div></div>
+    <div class="btn-zone">
+      <div class="tbtn tbtn-fire" data-action="fire"><span>THROW</span></div>
+      <div class="tbtn tbtn-jump" data-action="jump"><span>JUMP</span></div>
+    </div>
+  </div>
+
+  <div id="popups"></div>
+
+  <div id="banner" class="banner hidden"><div id="banner-main" class="banner-main"></div><div id="banner-sub" class="banner-sub"></div></div>
+  <div id="combo" class="combo hidden"></div>
+
+  <div id="title" class="screen">
+    <div class="logo">
+      <div class="logo-top">DINO</div>
+      <div class="logo-bottom">EGG BROS</div>
+    </div>
+    <div class="tagline">Trap the alien invaders in eggs. Roll them into oblivion.</div>
+    <button id="start-btn" class="big-btn">PRESS START</button>
+    <div class="controls touch-only">
+      <div><b>Left thumb</b>: drag anywhere to move &nbsp;·&nbsp; hold <b>down</b> + JUMP to drop</div>
+      <div><b>THROW</b> an egg (hold to keep throwing) &nbsp;·&nbsp; throw at a full egg to <b>KICK</b> it</div>
+    </div>
+    <div class="controls key-only">
+      <div><kbd>←</kbd><kbd>→</kbd> / <kbd>A</kbd><kbd>D</kbd> move</div>
+      <div><kbd>Z</kbd> / <kbd>Space</kbd> / <kbd>↑</kbd> jump &nbsp;·&nbsp; <kbd>↓</kbd>+jump drop</div>
+      <div><kbd>X</kbd> / <kbd>J</kbd> throw egg &nbsp;·&nbsp; throw at a full egg to <b>KICK</b> it</div>
+      <div><kbd>P</kbd> / <kbd>Esc</kbd> pause &nbsp;·&nbsp; <kbd>M</kbd> mute &nbsp;·&nbsp; gamepad supported</div>
+    </div>
+  </div>
+
+  <div id="pause" class="screen hidden">
+    <div class="screen-title">PAUSED</div>
+    <button id="resume-btn" class="big-btn">RESUME</button>
+    <div class="btn-row">
+      <button id="mute-btn" class="small-btn">SOUND: ON</button>
+      <button id="fps-btn" class="small-btn">FPS: OFF</button>
+    </div>
+  </div>
+
+  <div id="gameover" class="screen hidden">
+    <div class="screen-title" id="gameover-title">GAME OVER</div>
+    <div class="final-score">SCORE <span id="final-score">0</span></div>
+    <div class="final-score small">BEST <span id="best-score">0</span></div>
+    <button id="restart-btn" class="big-btn">PLAY AGAIN</button>
+  </div>
+
+  <div id="loading" class="screen">
+    <div class="loading-egg"></div>
+    <div class="loading-text">Hatching…</div>
+  </div>
+
+  <div id="rotate" class="screen">
+    <div class="rotate-phone"></div>
+    <div class="rotate-text">Turn your phone sideways</div>
+  </div>
+
+  <div id="fps" class="fps hidden"></div>
+
+  <div id="flash"></div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
